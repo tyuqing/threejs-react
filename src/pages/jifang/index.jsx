@@ -5,6 +5,7 @@ import {
 	CameraHelper, AmbientLight
 } from 'three';
 import { loaderObj } from '@/utils/loader';
+import { loaderGltf } from '../../utils/loader';
 
 function JiFang() {
 
@@ -63,8 +64,12 @@ function JiFang() {
 	}
 
 	//加载模型
-		loaderObj({objSrc:"/images/obj/server/uploads_files_2840457_server.obj", mtlSrc:'/images/obj/server/server.mtl'}, function(obj) {
-			scene.add(obj);
+	// loaderObj({ objSrc: "/images/obj/server/uploads_files_2840457_server.obj", mtlSrc: '/images/obj/server/server.mtl' }, function (obj) {
+	// 	scene.add(obj);
+	// 	render();
+	// })
+	loaderGltf({ gltfSrc: "/images/gltf/server/server.gltf", mtlSrc: '/images/obj/server/server.mtl' }, function (model) {
+			scene.add(model);
 			render();
 		})
 
