@@ -1,7 +1,7 @@
 
 import { useEffect, useRef } from 'react';
 import {
-	Scene, DirectionalLight, PerspectiveCamera, WebGLRenderer, AxesHelper,
+	Scene, Color,DirectionalLight, PerspectiveCamera, WebGLRenderer, AxesHelper,
 	CameraHelper, AmbientLight
 } from 'three';
 import { loaderObj } from '@/utils/loader';
@@ -12,14 +12,14 @@ function JiFang() {
 	const container = useRef(null)
 
 	//全局变量
-	const w = 800;
-	const h = 480;
+	const w = 1200;
+	const h = 720;
 	const r = w / h;
 	const s = 330;
 
 	//场景
 	const scene = new Scene();
-	//scene.background = new THREE.Color(0x666666);
+	scene.background = new Color(0x666666);
 
 	//光照
 	const aLight = new AmbientLight(0x404040, 1);

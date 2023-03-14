@@ -51,11 +51,12 @@ gltfLoad.load(
   gltfSrc,
   // 回调函数
   function ( gltf ) {
-
+		console.log(gltf)
       // 获取返回的gltf对象
       var model = gltf.scene;
       var animations = gltf.animations;
-      model.scale.set(150, 150, 150);
+      model.scale.set(100, 100, 100);
+			model.position.y = 0
 
       // 将模型添加到场景中
       callback&& callback( model );
