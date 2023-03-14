@@ -36,10 +36,9 @@ export function loaderObj({ objSrc, mtlSrc } = {}, callback) {
   );
 }
 
-export function loaderGltf({ gltfSrc, mtlSrc } = {}, callback) {
+export function loaderGltf({ gltfSrc, position: {x,y,z}={},rotate: {x:rotateX=0,y:rotateY=0,z:rotateZ=0}={} } = {}, callback) {
   // 创建loader
   const gltfLoad = new GLTFLoader();
-  const mtlLoader = new MTLLoader();
 
   // 加载gltf文件
   gltfLoad.load(
@@ -51,9 +50,13 @@ export function loaderGltf({ gltfSrc, mtlSrc } = {}, callback) {
       // 获取返回的gltf对象
       var model = gltf.scene;
       var animations = gltf.animations;
-      model.scale.set(100, 100, 100);
+      model.scale.set(50, 50, 50);
+			// 位置
       model.position.y = 0;
-
+			x&& (model.position.x = x)
+			z&& (model.position.z = z)
+			// 朝向
+			model.rotation.set(rotateX, rotateY, rotateZ)
       // 将模型添加到场景中
       callback && callback(model);
 
