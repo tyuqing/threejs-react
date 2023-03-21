@@ -1,0 +1,32 @@
+{
+  "sourceFile": "D:\\work\\6BF8CF7593EE42C4836BB96D093BDFC6_999_转换中\\MAX\\U标准网络机柜800宽.maxbk0.max",
+  "gltfFiles": [
+    "TWJQITWCOOJOPW6N2QZTSDZ0S4UDOR7UI.gltf"
+  ],
+  "texFiles": {
+    "CZ8CIFD0T7N2DNWJVR816IQUOD141X3DV": ".bin",
+    "CFY6XW6CITJUYN1WSOA0NR84UOQ21TENV": "jigui_03_f_bmp.jpg",
+    "G32NEWJS59DNDEUV5FN07R8Z0D7JS2FNQ": "smd_1.jpg",
+    "RQN0PJ2QOZN0SE80NR7WUP9PC5F4II30C": "smd_3.jpg",
+    "CO6WXAD1OO42GN32SOJ0U2JJNOH80T320": "smd_4.jpg",
+    "5810E902M31K21NPV2FWWI7P2I11WRQ82": "smd_5_f_tga.png"
+  },
+  "size": [
+    0.798915,
+    1.04026,
+    2.0
+  ],
+  "faces": 1608,
+  "verts": 1248,
+  "nodes": 16,
+  "createTime": "2020-10-08 3:10:30",
+  "author": "1854",
+  "computer": "DHJP-20160806JM",
+  "max": "#(22000, 55, 0, 22, 0, 0, 757, 2020, \"\")",
+  "version": "2.1",
+  "extensionsFile": "extensions.json",
+  "anim": [
+    "open",
+    "close"
+  ]
+}

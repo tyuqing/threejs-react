@@ -20,7 +20,7 @@ export function loaderObj({ objSrc, mtlSrc } = {}, callback) {
       objLoad.setMaterials(materials).load(
         objSrc,
         function (obj) {
-          console.log('Model: ', obj);
+          // console.log('Model: ', obj);
           obj.scale.set(150, 150, 150);
           obj.position.y = 0;
           callback && callback(obj);
@@ -36,7 +36,7 @@ export function loaderObj({ objSrc, mtlSrc } = {}, callback) {
   );
 }
 
-export function loaderGltf({ gltfSrc, position: { x, y, z } = {}, rotate: { x: rotateX = 0, y: rotateY = 0, z: rotateZ = 0 } = {} } = {}, callback) {
+export function loaderGltf({ scene, mixer,gltfSrc, position: { x, y, z } = {}, rotate: { x: rotateX = 0, y: rotateY = 0, z: rotateZ = 0 } = {} } = {}, callback) {
   // 创建loader
   const gltfLoad = new GLTFLoader();
 
@@ -58,15 +58,16 @@ export function loaderGltf({ gltfSrc, position: { x, y, z } = {}, rotate: { x: r
       // 朝向
       model.rotation.set(rotateX, rotateY, rotateZ)
       // 将模型添加到场景中
-      callback && callback(model);
+
+      scene.add(model);
 
       // 如果有动画，创建一个AnimationMixer对象，并将动画添加到它里面
-      if (animations && animations.length) {
-        mixer = new AnimationMixer(model);
-        for (var i = 0; i < animations.length; i++) {
-          mixer.clipAction(animations[i]).play();
-        }
-      }
+      // if (animations && animations.length) {
+      //   debugger
+      //    mixer = new AnimationMixer(model);
+			// 	mixer.clipAction( animations[0] ).play();
+      // }
+      callback && callback({model, animations});
     },
     // 可选的进度回调函数
     function (xhr) {
