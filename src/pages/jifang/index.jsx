@@ -13,6 +13,7 @@ import { loaderGltf } from '../../utils/loader';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 import { cabinets } from '@/temp/jifang.js'
+import { addSceneEvent } from '@/utils/events';
 
 function JiFang() {
 	const container = useRef(null);
@@ -57,6 +58,11 @@ function JiFang() {
 	const controls = new OrbitControls(camera, renderer.domElement);
 	controls.update();
 
+
+	useEffect(() => {
+		addSceneEvent(scene)
+	}, [scene])
+
 	// 插入dom
 	useEffect(() => {
 		container?.current?.appendChild(renderer.domElement);
@@ -95,25 +101,27 @@ function JiFang() {
 	// 先手动绘制 
 	function huizhi() {
 		cabinets.forEach(element => {
-			
-		loaderGltf(
-			{
-				gltfSrc: '/images/gltf/server/server.gltf',
-				position: {
-					x: element.cabinets3DView.positionX,
-					z: element.cabinets3DView.positionZ,
+
+			loaderGltf(
+				{
+					gltfSrc: '/images/gltf/server/server.gltf',
+					position: {
+						x: element.cabinets3DView.positionX,
+						z: element.cabinets3DView.positionZ,
+					},
+					rotate: {
+						y: element.cabinets3DView.rotateY
+					}
 				},
-				rotate: {
-					y: element.cabinets3DView.rotateY
+				function (model) {
+					scene.add(model);
+					addSceneEvent(scene)
+					render();
 				}
-			},
-			function (model) {
-				scene.add(model);
-				render();
-			}
-		);
+			);
 		});
 	}
+
 	return (<>
 		<button onClick={() => huizhi()}>绘制</button>
 		<div ref={container}></div>
