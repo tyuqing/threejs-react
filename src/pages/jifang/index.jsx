@@ -10,11 +10,10 @@ import {
 	WebGLRenderer,
 	Clock,
 	AnimationMixer,
-	ObjectLoader,
-	Mesh,
+	LoopOnce
 } from 'three';
-			import Stats from 'three/addons/libs/stats.module.js';
-			import { loaderGltf } from '../../utils/loader';
+import Stats from 'three/addons/libs/stats.module.js';
+import { loaderGltf } from '../../utils/loader';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 import { cabinets } from '@/temp/jifang.js'
@@ -49,7 +48,7 @@ function JiFang() {
 		//照相机
 		camera = new PerspectiveCamera(45, r, 1, 1000000);
 		//const camera = new THREE.OrthographicCamera(-s*r, s*r, s, -s, 1, 1000);
-		camera.position.set(300, 200, 300);
+		camera.position.set(100, 200, 300);
 		camera.lookAt(scene.position);
 
 		//辅助对象 坐标
@@ -85,8 +84,8 @@ function JiFang() {
 	// 插入dom
 	useEffect(() => {
 		container?.current?.appendChild(renderer.domElement);
-		container?.current?.appendChild( stats.dom );
-}, [container]);
+		container?.current?.appendChild(stats.dom);
+	}, [container]);
 
 
 	// const ctrl = new OrbitControls(camera, renderer.domElement);
@@ -103,7 +102,7 @@ function JiFang() {
 		if (mixer) {
 			console.log('donghua')
 			mixer.update(clock.getDelta());
-		} 
+		}
 		//  一直旋转
 		// 	scene.rotation.y += 0.002;
 		render()
@@ -127,15 +126,28 @@ function JiFang() {
 	loaderGltf(
 		{
 			// gltfSrc: '/images/gltf/server/server.gltf',
-			gltfSrc: '/images/gltf/server1/B706C5B30207178AE82438A46A375F70.gltf',
+			gltfSrc: '/images/gltf/server-donghua/server.gltf',
 			scene: scene,
 		},
-		function ({model, animations}) {
+		function ({ model, animations }) {
 			// if (animations && animations.length) {
 			// 	  // debugger
 			// 	   mixer = new AnimationMixer(model);
 			// 		mixer.clipAction( animations[0] ).play();
 			// 	}
+
+			// 获取动画混合器
+			mixer = new AnimationMixer(model);
+			// 获取动画剪辑
+			const clip = animations[0];
+			// 创建动画动作
+			const action = mixer.clipAction(clip);
+			// 设置动画循环模式为不循环
+			action.setLoop(LoopOnce);
+			// 动画播放完成后停留在最后一帧
+			action.clampWhenFinished = true;
+			// 播放动画
+			action.play();
 		}
 	);
 

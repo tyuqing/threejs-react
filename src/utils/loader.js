@@ -50,7 +50,7 @@ export function loaderGltf({ scene, mixer,gltfSrc, position: { x, y, z } = {}, r
       // 获取返回的gltf对象
       var model = gltf.scene;
       var animations = gltf.animations;
-      model.scale.set(50, 50, 50);
+      model.scale.set(60, 60, 60);
       // 位置
       model.position.y = 0;
       x && (model.position.x = x)
