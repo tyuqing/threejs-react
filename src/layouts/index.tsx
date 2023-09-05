@@ -11,6 +11,12 @@ export default function Layout() {
         <li>
           <Link to="/jifang">机房</Link>
         </li>
+        <li>
+          <Link to="/louyu_obj">楼宇obj</Link>
+        </li>
+        <li>
+          <Link to="/louyu_gltf">楼宇gltf</Link>
+        </li>
       </ul>
       <Outlet />
     </div>
