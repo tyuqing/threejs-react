@@ -109,35 +109,17 @@ function JiFang() {
 		stats.update()
 	}
 
-	//加载模型
-	// loaderObj({ objSrc: "/images/obj/louyu1/scifi-building-21.obj", mtlSrc: '/images/obj/louyu1/scifi-building-21.mtl' }, function (obj) {
-	// 	scene.add(obj);
-	// 	render();
-	// })
-
-	// index json绘制
-	// var loader = new ObjectLoader();
-	// loader.load('/images/gltf/server1/index.json', function(geometry, materials) {
-	//   var mesh = new Mesh(geometry, materials);
-	//   scene.add(mesh);
-	// 		render()
-	// 	});
 
 	loaderGltf(
 		{
 			// gltfSrc: '/images/gltf/server/server.gltf',
-			gltfSrc: '/images/gltf/louyu1/scifi-building-21.gltf',
+			gltfSrc: '/images/gltf/zizhi_xizilou/xzl.gltf',
 			scene: scene,
 		},
 	);
 
 
-	function donghua() {
-		console.log(gltfList)
-	}
-
 	return (<>
-		<button onClick={() => donghua()}>动画</button>
 		<div ref={container}></div>
 	</>);
 }
