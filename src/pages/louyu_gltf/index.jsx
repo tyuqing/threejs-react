@@ -37,13 +37,13 @@ function JiFang() {
 
 		//场景
 		scene = new Scene();
-		scene.background = new Color(0xf9f9fb);
+		scene.background = new Color(0x000000);
 
 		//光照
-		const aLight = new AmbientLight(0x404040, 1);
+		const aLight = new AmbientLight(0x000000, 1);
 		scene.add(aLight);
-		const dLight = new DirectionalLight(0xffffff, 1);
-		scene.add(dLight);
+		// const dLight = new DirectionalLight(0xffffff, 1);
+		// scene.add(dLight);
 
 		//照相机
 		camera = new PerspectiveCamera(45, r, 1, 1000000);
@@ -113,7 +113,7 @@ function JiFang() {
 	loaderGltf(
 		{
 			// gltfSrc: '/images/gltf/server/server.gltf',
-			gltfSrc: '/images/gltf/zizhi_xizilou/xzl.gltf',
+			gltfSrc: '/images/gltf/faguanglou/发光的楼.gltf',
 			scene: scene,
 		},
 	);

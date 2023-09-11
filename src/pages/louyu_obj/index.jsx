@@ -37,13 +37,13 @@ function JiFang() {
 
 		//场景
 		scene = new Scene();
-		scene.background = new Color(0xf9f9fb);
+		scene.background = new Color(0x000000);
 
 		//光照
-		const aLight = new AmbientLight(0x404040, 1);
+		const aLight = new AmbientLight(0x000000, 1);
 		scene.add(aLight);
-		const dLight = new DirectionalLight(0xffffff, 1);
-		scene.add(dLight);
+		// const dLight = new DirectionalLight(0xffffff, 1);
+		// scene.add(dLight);
 
 		//照相机
 		camera = new PerspectiveCamera(45, r, 1, 1000000);
@@ -110,7 +110,7 @@ function JiFang() {
 	}
 
 	//加载模型
-	loaderObj({ objSrc: "/images/obj/louyu1/scifi-building-21.obj", mtlSrc: '/images/obj/louyu1/scifi-building-21.mtl' }, function (obj) {
+	loaderObj({ objSrc: "/images/obj/faguanglou/发光的楼.obj", mtlSrc: '/images/obj/faguanglou/发光的楼.mtl' }, function (obj) {
 		scene.add(obj);
 		render();
 	})
