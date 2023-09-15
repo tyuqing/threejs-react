@@ -17,6 +17,9 @@ export default function Layout() {
         <li>
           <Link to="/louyu_gltf">楼宇gltf</Link>
         </li>
+        <li>
+          <Link to="/ditu_gltf">地图gltf</Link>
+        </li>
       </ul>
       <Outlet />
     </div>
