@@ -32,6 +32,7 @@ function JiFang() {
 
 	init()
 	animate()
+	// render()
 
 	function init() {
 
@@ -44,6 +45,10 @@ function JiFang() {
 		scene.add(aLight);
 		// const dLight = new DirectionalLight(0xffffff, 1);
 		// scene.add(dLight);
+		const dLight = new DirectionalLight(0xffffff, 1);
+		dLight.position.set(0, 1, 0); // 设置光源位置在场景正上方
+		dLight.target.position.set(0, 0, 0); // 设置光源照射的目标
+		scene.add(dLight);
 
 		//照相机
 		camera = new PerspectiveCamera(45, r, 1, 1000000);
@@ -63,6 +68,9 @@ function JiFang() {
 		});
 		renderer.setSize(w, h);
 		renderer.setClearColor(0xffffff, 1);
+
+		renderer.gammaOutput = true;
+renderer.gammaFactor = 1.0;
 
 
 		//控制器

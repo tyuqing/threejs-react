@@ -38,17 +38,21 @@ function JiFang() {
 		//场景
 		scene = new Scene();
 		scene.background = new Color(0x000000);
+		// scene.exposure = 1
 
 		//光照
-		const aLight = new AmbientLight(0x000000, 1);
+		const aLight = new AmbientLight(0x000000, 1); //080F20
 		scene.add(aLight);
-		const dLight = new DirectionalLight(0x000000, 1);
-		scene.add(dLight);
+		
+		const dLight = new DirectionalLight(0x999999, 1);
+		dLight.position.set(0, 1, 0); // 设置光源位置在场景正上方
+		dLight.target.position.set(0, 0, 0); // 设置光源照射的目标
+		// scene.add(dLight);
 
 		//照相机
 		camera = new PerspectiveCamera(45, r, 1, 1000000);
 		//const camera = new THREE.OrthographicCamera(-s*r, s*r, s, -s, 1, 1000);
-		camera.position.set(100, 200, 300);
+		camera.position.set(10000, 20000, 30000);
 		camera.lookAt(scene.position);
 
 		//辅助对象 坐标
@@ -62,7 +66,16 @@ function JiFang() {
 			antialias: true,
 		});
 		renderer.setSize(w, h);
-		renderer.setClearColor(0xffffff, 1);
+		// renderer.setClearColor(0xffffff, 1);
+		renderer.gammaOutput = false
+renderer.setClearColor(0x000000, 0); // 设置清除色为黑,无雾效
+renderer.shadowMap.enabled = false;
+// 调低 gamma 值
+renderer.gammaFactor = 0.5; 
+
+// 禁用 gamma 纠正
+renderer.gammaInput = false;
+renderer.gammaOutput = false;
 
 		//控制器
 		controls = new OrbitControls(camera, renderer.domElement);
