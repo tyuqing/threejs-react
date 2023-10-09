@@ -7,6 +7,7 @@ export default defineConfig({
     { path: "/louyu_obj", component: "louyu_obj" },
     { path: "/louyu_gltf", component: "louyu_gltf" },
     { path: "/ditu_gltf", component: "ditu_gltf" },
+    { path: "/yuanqu_gltf", component: "yuanqu_gltf" },
   ],
   npmClient: 'npm',
 });

@@ -20,6 +20,9 @@ export default function Layout() {
         <li>
           <Link to="/ditu_gltf">地图gltf</Link>
         </li>
+        <li>
+          <Link to="/yuanqu_gltf">园区gltf</Link>
+        </li>
       </ul>
       <Outlet />
     </div>
