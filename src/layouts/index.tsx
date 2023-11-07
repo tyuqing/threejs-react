@@ -23,6 +23,9 @@ export default function Layout() {
         <li>
           <Link to="/yuanqu_gltf">园区gltf</Link>
         </li>
+        <li>
+          <Link to="/yuanqu_glbx">园区glbx</Link>
+        </li>
       </ul>
       <Outlet />
     </div>
