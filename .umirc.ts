@@ -8,7 +8,8 @@ export default defineConfig({
     { path: "/louyu_gltf", component: "louyu_gltf" },
     { path: "/ditu_gltf", component: "ditu_gltf" },
     { path: "/yuanqu_gltf", component: "yuanqu_gltf" },
-    { path: "/yuanqu_glbx", component: "YuanquGlbx" },
+    { path: "/wuhan", component: "wuhan" },
+    { path: "/wuhan_obj", component: "wuhan_obj" },
   ],
   npmClient: 'npm',
 });

@@ -1,7 +1,5 @@
 import { useEffect, useRef } from 'react';
-
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
-
 import {
 	AmbientLight,
 	AxesHelper,
@@ -22,7 +20,7 @@ import {
 	FloatType,
 } from 'three';
 import Stats from 'three/addons/libs/stats.module.js';
-import { loaderGltf, loaderObj } from '../../utils/loader';
+import { loaderObj } from '../../utils/loader';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 import { cabinets } from '@/temp/jifang.js'
@@ -46,11 +44,10 @@ function JiFang() {
 
 		//场景
 		scene = new Scene();
-		// scene.background = new Color(0xcccccc);
+		// scene.background = new Color(0x000000);
 
-
-		//光照
-		// const aLight = new AmbientLight(0xffffff, 1);
+		// //光照
+		// const aLight = new AmbientLight(0x9D9D9D, 1);
 		// scene.add(aLight);
 		// const dLight = new DirectionalLight(0xffffff, 1);
 		// scene.add(dLight);
@@ -58,7 +55,7 @@ function JiFang() {
 		//照相机
 		camera = new PerspectiveCamera(45, r, 1, 1000000);
 		//const camera = new THREE.OrthographicCamera(-s*r, s*r, s, -s, 1, 1000);
-		camera.position.set(10000, 20000, 30000);
+		camera.position.set(100, 200, 300);
 		camera.lookAt(scene.position);
 
 		//辅助对象 坐标
@@ -72,7 +69,7 @@ function JiFang() {
 			antialias: true,
 		});
 		renderer.setSize(w, h);
-		// renderer.setClearColor(0xffffff, 1);
+		renderer.setClearColor(0xffffff, 1);
 
 
 		//控制器
@@ -84,31 +81,34 @@ function JiFang() {
 		// 性能分析
 		stats = new Stats();
 
+
+		// 创建一个PMREM生成器
+		var pmremGenerator = new PMREMGenerator(renderer);
+		pmremGenerator.compileEquirectangularShader();
+
+		// 加载HDR图像
+		var rgbeLoader = new RGBELoader();
+		rgbeLoader.setDataType(FloatType);
+		rgbeLoader.load('/images/hdr/sky.hdr', function (texture) {
+			// 从HDR图像生成PMREM
+			var envMap = pmremGenerator.fromEquirectangular(texture).texture;
+			// 将PMREM作为场景的环境贴图
+			scene.environment = envMap;
+			// 将HDR图像作为场景的背景
+			scene.background = envMap;
+			// 释放资源
+			texture.dispose();
+			pmremGenerator.dispose();
+		});
+		// 创建光源
+		const directionalLight = new DirectionalLight(0xffffff, 1);
+		// directionalLight.color.setHSL(0.1, 1, 0.95);
+		// directionalLight.position.set(- 1, 1.75, 1);
+		directionalLight.position.set(0, 100, 500);
+		scene.add(directionalLight);
+
 	}
 
-	// 创建一个PMREM生成器
-	var pmremGenerator = new PMREMGenerator(renderer);
-	pmremGenerator.compileEquirectangularShader();
-
-	// 加载HDR图像
-	var rgbeLoader = new RGBELoader();
-	rgbeLoader.setDataType(FloatType);
-	rgbeLoader.load('/images/hdr/sky.hdr', function (texture) {
-		// 从HDR图像生成PMREM
-		var envMap = pmremGenerator.fromEquirectangular(texture).texture;
-		// 将PMREM作为场景的环境贴图
-		scene.environment = envMap;
-		// 将HDR图像作为场景的背景
-		scene.background = envMap;
-		// 释放资源
-		texture.dispose();
-		pmremGenerator.dispose();
-	});
-// 创建光源
-const directionalLight = new DirectionalLight( 0xffffff, 0.3 );
-directionalLight.color.setHSL( 0.1, 1, 0.95 );
-directionalLight.position.set( - 1, 1.75, 1 );
-scene.add( directionalLight );
 
 	// useEffect(() => {
 	// 	addSceneEvent(scene)
@@ -143,46 +143,10 @@ scene.add( directionalLight );
 	}
 
 	//加载模型
-	loaderObj({ objSrc: "/images/obj/faguanglou/发光的楼.obj", mtlSrc: '/images/obj/faguanglou/发光的楼.mtl' }, function (obj) {
+	loaderObj({ objSrc: "/images/obj/wuhan/wuhan.obj", mtlSrc: '/images/obj/wuhan/wuhan.mtl' }, function (obj) {
 		scene.add(obj);
 		render();
 	})
-
-	// index json绘制
-	// var loader = new ObjectLoader();
-	// loader.load('/images/gltf/server1/index.json', function(geometry, materials) {
-	//   var mesh = new Mesh(geometry, materials);
-	//   scene.add(mesh);
-	// 		render()
-	// 	});
-
-	// loaderGltf(
-	// 	{
-	// 		// gltfSrc: '/images/gltf/server/server.gltf',
-	// 		gltfSrc: '/images/gltf/louyu1/scifi-building-21.gltf',
-	// 		scene: scene,
-	// 	},
-	// 	function ({ model, animations }) {
-	// 		// if (animations && animations.length) {
-	// 		// 	  // debugger
-	// 		// 	   mixer = new AnimationMixer(model);
-	// 		// 		mixer.clipAction( animations[0] ).play();
-	// 		// 	}
-
-	// 		// 获取动画混合器
-	// 		mixer = new AnimationMixer(model);
-	// 		// 获取动画剪辑
-	// 		const clip = animations[0];
-	// 		// 创建动画动作
-	// 		const action = mixer.clipAction(clip);
-	// 		// 设置动画循环模式为不循环
-	// 		action.setLoop(LoopOnce);
-	// 		// 动画播放完成后停留在最后一帧
-	// 		action.clampWhenFinished = true;
-	// 		// 播放动画
-	// 		action.play();
-	// 	}
-	// );
 
 
 	function donghua() {

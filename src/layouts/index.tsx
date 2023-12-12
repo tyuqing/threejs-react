@@ -24,7 +24,10 @@ export default function Layout() {
           <Link to="/yuanqu_gltf">园区gltf</Link>
         </li>
         <li>
-          <Link to="/yuanqu_glbx">园区glbx</Link>
+          <Link to="/wuhan">武汉城市地图</Link>
+        </li>
+        <li>
+          <Link to="/wuhan_obj">武汉城市地图obj</Link>
         </li>
       </ul>
       <Outlet />

@@ -125,7 +125,8 @@ renderer.gammaOutput = false;
 	loaderGltf(
 		{
 			// gltfSrc: '/images/gltf/server/server.gltf',
-			gltfSrc: '/images/gltf/yuanqu/园区.gltf',
+			// gltfSrc: '/images/gltf/yuanqu/园区.gltf',
+			gltfSrc: '/images/glb/yuanqu/园区.glb',
 			scene: scene,
 		},
 	);
